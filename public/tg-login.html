@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+        <title>PureClean — Sign In</title>
+
+        <style>
+            :root {
+                --btn: #2e6c86;
+                --ink: #0d3246;
+                --muted: #5a7787;
+                --hero: url("./washing-machine-isolated-white.png");
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                font-family: system-ui, -apple-system, Segoe UI, Roboto,
+                    sans-serif;
+                color: var(--ink);
+            }
+
+            .hero {
+                position: absolute;
+                inset: 0;
+                background-image: var(--hero);
+                background-size: cover;
+                background-position: center;
+                z-index: 0;
+            }
+
+            .top-scrim {
+                position: absolute;
+                inset: 0 0 auto 0;
+                height: 120px;
+                background: linear-gradient(
+                    to bottom,
+                    rgba(255, 255, 255, 0.55),
+                    rgba(255, 255, 255, 0)
+                );
+                pointer-events: none;
+                z-index: 1;
+            }
+
+            .bottom-scrim {
+                position: absolute;
+                inset: auto 0 0 0;
+                height: 38%;
+                background: linear-gradient(
+                    to top,
+                    rgba(255, 255, 255, 0.86) 0%,
+                    rgba(255, 255, 255, 0.62) 35%,
+                    rgba(255, 255, 255, 0.18) 70%,
+                    rgba(255, 255, 255, 0) 100%
+                );
+                pointer-events: none;
+                z-index: 1;
+            }
+
+            .overlay {
+                position: relative;
+                z-index: 2;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 24px 20px 22px;
+            }
+
+            h1 {
+                font-size: 28px;
+                font-weight: 800;
+                line-height: 1.2;
+                letter-spacing: 0.2px;
+                max-width: 18ch;
+                color: #1e4b60;
+                text-shadow: 0 1px 2px rgba(255, 255, 255, 0.55);
+                margin: 10px 0 0 6px;
+            }
+
+            /* Center Telegram button */
+            .cta-wrap {
+                text-align: center;
+                margin-bottom: 6px;
+            }
+
+            .note {
+                margin-top: 10px;
+                font-size: 12px;
+                color: var(--muted);
+            }
+
+            @media (max-width: 420px) {
+                h1 {
+                    font-size: 24px;
+                }
+                .overlay {
+                    padding: 18px 16px 18px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="hero"></div>
+        <div class="top-scrim"></div>
+        <div class="bottom-scrim"></div>
+
+        <div class="overlay">
+            <h1 style="margin-top: 50px">
+                Tired of Spending<br />Hours Doing Laundry?
+            </h1>
+
+            <div class="cta-wrap">
+                <!-- Real Telegram button -->
+                <script
+                    async
+                    src="https://telegram.org/js/telegram-widget.js?19"
+                    data-telegram-login="pureclean_bot"
+                    data-size="large"
+                    data-radius="28"
+                    data-userpic="false"
+                    data-request-access="write"
+                    data-onauth="onTelegramAuth(user)"
+                ></script>
+
+                <p class="note">
+                    We’ll only use your Telegram to verify your identity.
+                </p>
+            </div>
+        </div>
+
+        <script>
+            function onTelegramAuth(user) {
+                try {
+                    const payload = JSON.stringify(user);
+
+                    if (window.TelegramChannel?.postMessage)
+                        window.TelegramChannel.postMessage(payload);
+
+                    if (window.parent)
+                        window.parent.postMessage(
+                            { type: "tg_login_success", user },
+                            "*"
+                        );
+                } catch (e) {
+                    console.error("Telegram auth error:", e);
+                }
+            }
+        </script>
+    </body>
+</html>
