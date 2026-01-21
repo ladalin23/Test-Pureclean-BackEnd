@@ -7,6 +7,7 @@ use App\Models\Setting;
 use App\Models\Service;
 use App\Observers\SettingObserver;
 use App\Observers\ServiceObserver;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (app()->environment('local')) {
+            URL::forceScheme('https');
+        }
         Setting::observe(SettingObserver::class);
         Service::observe(ServiceObserver::class);
 

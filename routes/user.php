@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\v1\User\LoyaltyController;
 use App\Http\Controllers\Api\v1\User\RewardController;
 use App\Http\Controllers\Api\v1\User\BannersController;
 use App\Http\Controllers\Api\v1\User\GuideController;
+use App\Http\Controllers\Api\v1\User\FCMTokenController;
 use App\Models\DeviceToken;
 
 Route::post('/register', [UserAuthController::class, 'register']);

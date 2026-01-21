@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1\User;
 
 use App\Models\DeviceToken;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\v1\BaseAPI;
 
 class FCMTokenController extends BaseAPI
 {

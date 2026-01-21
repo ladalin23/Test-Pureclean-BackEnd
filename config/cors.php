@@ -6,7 +6,11 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://pureclean-admin.botumsakor.com', 'http://localhost:5000', 'http://localhost:3000'], // ✅ YOUR FRONTEND DOMAIN
+    'allowed_origins' => ['https://test-pureclean.vercel.app',
+                         'http://localhost:3000', 
+                         'https://pat-premethodical-kathrine.ngrok-free.dev',
+                         'http://localhost:5000'], 
+                         
 
     'allowed_origins_patterns' => [],
 
